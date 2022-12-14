@@ -83,4 +83,5 @@ void loop() {
   HandleToggleSwitchesAsButtons();
   Joystick.sendState();
   delay(10);
+
 }
