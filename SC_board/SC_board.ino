@@ -13,10 +13,6 @@ Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID,
   true, true, false, false, false, false,
   false, false, false, false, false);
 
-// Set to true to test "Auto Send" mode or false to test "Manual Send" mode.
-//const bool testAutoSendMode = true;
-const bool testAutoSendMode = true;
-
 //dedicates the first num_of_toggles * 2 buttons to spam that state
 const int NUM_OF_TOGGLES = 4;
 // start digital pin inputs on pin 2
