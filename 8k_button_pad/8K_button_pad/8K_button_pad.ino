@@ -5,8 +5,10 @@
 
 
 const int MAX_NUM_OF_BUTTONS = 8;
+const long DEBOUNCE_TIME = 5;
 int buttonPins[MAX_NUM_OF_BUTTONS] = {10, 16, 14, 15, 6, 7, 8, 9};
 char buttonToKeyMap[MAX_NUM_OF_BUTTONS] = { ';', 'l', 'k', 'j', 'f', 'd', 's', 'a'};
+long lastButtonDebounceTime[MAX_NUM_OF_BUTTONS] = { 0 };
 int buttonValues[MAX_NUM_OF_BUTTONS] = {0};
 void setup() {
   // put your setup code here, to run once:
@@ -26,14 +28,19 @@ void loop() {
   for(int i = 0; i < MAX_NUM_OF_BUTTONS; i++) {
      int currentButtonState = !digitalRead(buttonPins[i]);
 
-     if(currentButtonState != buttonValues[i]) {
-       buttonValues[i] = currentButtonState;
+
+     if((millis() - lastButtonDebounceTime[i] > DEBOUNCE_TIME) && (currentButtonState != buttonValues[i])) {  
+       lastButtonDebounceTime[i] = millis();
        if(currentButtonState) {
          Keyboard.press(buttonToKeyMap[i]);
-       } else {
+       } 
+       else {
          Keyboard.release(buttonToKeyMap[i]);
        }
+      
+       buttonValues[i] = currentButtonState;
        
-     }  asdfjkl;
+     }
   }
 }
+
